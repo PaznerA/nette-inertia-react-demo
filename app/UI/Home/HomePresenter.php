@@ -31,4 +31,14 @@ final class HomePresenter extends Nette\Application\UI\Presenter
         );
 
     }
+    public function actionDemo(): void
+    {
+        $this->sendResponse(
+            response: $this->inertiaFactory->create(
+                component: 'Demo/Index', 
+                props: []
+            )
+        );
+
+    }
 }
