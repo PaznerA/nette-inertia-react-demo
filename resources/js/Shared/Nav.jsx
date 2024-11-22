@@ -6,7 +6,7 @@ const NavButton = ({active, title, href, onSetActive}) => {
         <div className="text-sm lg:flex-grow">
             <Link 
                 className={active ? defaultLinkClass + "nav-item nav-link active" : defaultLinkClass + "nav-item nav-link"} 
-                href={"greet?name=" + href}
+                href={"/home/greet?name=" + href}
                 onClick={onSetActive} >
                 {title}
             </Link>
