@@ -1,0 +1,34 @@
+parameters:
+	wwwDir: %rootDir%/www
+
+application:
+	errorPresenter:
+		4xx: Error:Error4xx
+		5xx: Error:Error5xx
+	mapping: App\UI\*\**Presenter
+
+extensions:
+    inertia: App\Inertia\InertiaExtension
+
+inertia:
+    assets:
+        manifest: %wwwDir%/dist/manifest.json
+    rootView: %rootDir%/app/Core/Inertia/App.latte
+
+database:
+	dsn: 'sqlite::memory:'
+	user:
+	password:
+
+
+latte:
+	strictTypes: yes
+	strictParsing: yes
+	extensions:
+		- App\UI\Accessory\LatteExtension
+
+
+di:
+	export:
+		parameters: no
+		tags: no

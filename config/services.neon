@@ -1,0 +1,13 @@
+services:
+	- App\Core\RouterFactory::createRouter
+	- App\Inertia\ViteMacroExtension
+	latte.latteFactory:
+		setup:
+			- addExtension(@App\Inertia\ViteMacroExtension)
+
+
+search:
+	-	in: %appDir%
+		classes:
+			- *Factory
+			- *Facade

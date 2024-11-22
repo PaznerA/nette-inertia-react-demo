@@ -1,0 +1,26 @@
+{contentType text/html}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inertia App</title>
+    
+    {ifset $page->version}
+        <script n:nonce>window.version = {$page->version}</script>
+    {/ifset}
+</head>
+<body>
+    <div id="app" data-page="{json_encode($page)|noescape}"></div>
+    
+    {var $prodDistPath = __DIR__ . "/../../../www"}
+    {if file_exists($prodDistPath . "/dist/manifest.json")}
+        {* ProdMode *}
+        <script type="module" src="{='dist/js/app.jsx'|viteAsset}"></script>
+    {else}
+        {* DevMode *}
+        <script type="module" src="http://localhost:5173/@vite/client"></script>
+        <script type="module" src="http://localhost:5173/js/app.jsx"></script>
+    {/if}
+</body>
+</html>
