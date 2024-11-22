@@ -6,7 +6,7 @@ const NavButton = ({active, title, href, onSetActive}) => {
         <div className="text-sm lg:flex-grow">
             <Link 
                 className={active ? defaultLinkClass + "nav-item nav-link active" : defaultLinkClass + "nav-item nav-link"} 
-                href={"/home/greet?name=" + href}
+                href={href}
                 onClick={onSetActive} >
                 {title}
             </Link>
@@ -20,10 +20,6 @@ export default class Nav extends React.Component {
     this.state = {
       activeIndex: 0, // keep the active index in state
       buttons: [
-    {
-        title: "Home",
-        key: 0
-    },
     {
         title: "Team",
         key: 1
@@ -61,10 +57,13 @@ render() {
                 <svg className="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
                 </button>
             </div>
-            <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+            <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto"> 
+                <NavButton href="/home" onSetActive="" active={false} title="Home" key="0" />
+                <NavButton href="/books/index" onSetActive="" active={false} title="BOOKS list(err)" key="0" />
+                <NavButton href="/books/create" onSetActive="" active={false} title="BOOKS create" key="1" />
                 {this.state.buttons.map((button, buttonIndex) => 
-                    /* determine which nav button is active depending on the activeIndex state */
-                    <NavButton href={button.title} onSetActive={ () => this.handleChangeActive(buttonIndex)} active={buttonIndex === activeIndex } title={button.title} key={button.key} />)}
+                    /* todo: determine which nav button is active depending on the activeIndex state */
+                    <NavButton href={"/home/greet?name=" + button.title} onSetActive={ () => this.handleChangeActive(buttonIndex)} active={buttonIndex === activeIndex } title={button.title} key={button.key} />)}
             </div>
             <div></div>
         </nav>
