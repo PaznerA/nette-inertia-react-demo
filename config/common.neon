@@ -16,9 +16,7 @@ inertia:
     rootView: %rootDir%/app/Core/Inertia/App.latte
 
 database:
-	dsn: 'sqlite::memory:'
-	user:
-	password:
+	dsn: "sqlite:%rootDir%/bin/test.db"
 
 
 latte:

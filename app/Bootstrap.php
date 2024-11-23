@@ -15,6 +15,7 @@ class Bootstrap
 	{
 		$this->rootDir = dirname(__DIR__);
 		$this->configurator = new Configurator;
+		// $this->configurator->setDebugMode(FALSE); // for performance testing
 		$this->configurator->setTempDirectory($this->rootDir . '/temp');
 	}
 

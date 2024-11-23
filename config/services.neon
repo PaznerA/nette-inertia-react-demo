@@ -1,6 +1,7 @@
 services:
 	- App\Core\RouterFactory::createRouter
 	- App\Inertia\ViteMacroExtension
+	- App\UI\Books\BooksController
 	latte.latteFactory:
 		setup:
 			- addExtension(@App\Inertia\ViteMacroExtension)
