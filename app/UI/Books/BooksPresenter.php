@@ -13,16 +13,22 @@ final class BooksPresenter extends Nette\Application\UI\Presenter
         private BooksController $controller
     ) {}
 
-    public function actionDefault(): void
-    {
-        $this->actionBookIndex();
-    }
+    //todo: extract into base InertiaPresenter?
+    public function actionDefault(): void { $this->actionBookIndex(); }
     
     public function actionIndex(): void
     {
+        try {
+            $books = $this->controller->index();
+        } catch (\Exception) {
+            if (empty($books)) {
+                $this->controller->createDummy();
+                $books = $this->controller->index();
+            } 
+        }
         $this->sendResponse(
             $this->inertiaFactory->create(component: 'Book/Index', props: [
-                'books' => $this->controller->index(),
+                'books' => $books,
             ])
         );
     }

@@ -9,13 +9,6 @@
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );",
 
-    "-- Insert sample data into the 'user' table
-        INSERT INTO user (username, email, password_hash) VALUES
-            ('john_doe', 'john@example.com', 'hashed_password_1'),
-            ('jane_smith', 'jane@example.com', 'hashed_password_2'),
-            ('bob_johnson', 'bob@example.com', 'hashed_password_3')
-        ;",
-
     "-- Create the 'book' table
         CREATE TABLE IF NOT EXISTS book (
             id INTEGER PRIMARY KEY AUTOINCREMENT,

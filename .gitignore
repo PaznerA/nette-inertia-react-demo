@@ -4,4 +4,4 @@ node_modules
 log/*
 temp/*
 www/dist/*
-bin/database.sqlite
+bin/test.db

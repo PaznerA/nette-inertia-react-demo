@@ -11,6 +11,7 @@ final class BooksController {
     ) {}
 
     /**
+     * Emulation of Laravel controller - returns a list of books
      * @param array<string, int|string> $params
      * @return array<int, array<string, mixed>>
      */
@@ -19,17 +20,38 @@ final class BooksController {
         return $this->db->query("SELECT * FROM book LIMIT 50")->fetchAll();
     }
 
+
+
     /**
+     * Emulation of Laravel controller - create a book
+     * @param array<string, int|string> $params
+     * @return array<int, array<string, mixed>>
+     * @throws \Exception
+     */
+    public function create(?array $data = null): void {
+        $this->db->query("INSERT INTO book", $data);
+    }
+
+    /**
+     * Temporary func for demo purposes - init db(user,book,tag)
      * @param array<string, int|string> $params
      * @return array<int, array<string, mixed>>
      */
-    public function create(?array $data = null): array {
+    public function createDummy(?array $data = null): void {
 
-        /** init queries **/
+        /** init queries - create tables **/
         $queries = require_once(__DIR__ . '/../../../bin/migration.php');
         foreach($queries as $query) {
             $this->db->query($query);
         }
+
+        /** init queries - add dummy users **/
+        $this->db->query("
+        INSERT INTO user (username, email, password_hash) VALUES
+            ('john_doe', 'john@example.com', 'hashed_password_1'),
+            ('jane_smith', 'jane@example.com', 'hashed_password_2'),
+            ('bob_johnson', 'bob@example.com', 'hashed_password_3')
+        ;");
 
         if($data === null) {
             $data = [
@@ -48,8 +70,6 @@ final class BooksController {
         $data["author"] = "Jarda jiný";
         $data["isbn"] = "iwdde59";
         $this->db->query("INSERT INTO book", $data);
-
-        return $this->db->query("SELECT * FROM book LIMIT 50")->fetchAll();
     }
 
 

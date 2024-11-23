@@ -18,23 +18,23 @@ export default class Nav extends React.Component {
     constructor(props) {
     super(props);
     this.state = {
-      activeIndex: 0, // keep the active index in state
+      activeIndex: 1, // keep the active index in state
       buttons: [
     {
         title: "Team",
-        key: 1
-    },
-    {
-        title: "Discord",
-        key: 2
-    },
-    {
-        title: "Gallery",
         key: 3
     },
     {
-        title: "Download",
+        title: "Discord",
         key: 4
+    },
+    {
+        title: "Gallery",
+        key: 5
+    },
+    {
+        title: "Download",
+        key: 6
     }
 ]
   }
@@ -59,8 +59,8 @@ render() {
             </div>
             <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto"> 
                 <NavButton href="/home" onSetActive="" active={false} title="Home" key="0" />
-                <NavButton href="/books/index" onSetActive="" active={false} title="BOOKS list(err)" key="0" />
-                <NavButton href="/books/create" onSetActive="" active={false} title="BOOKS create" key="1" />
+                <NavButton href="/books/index" onSetActive="" active={false} title="BOOKS list" key="1" />
+                <NavButton href="/books/create" onSetActive="" active={false} title="BOOKS create(err)" key="2" />
                 {this.state.buttons.map((button, buttonIndex) => 
                     /* todo: determine which nav button is active depending on the activeIndex state */
                     <NavButton href={"/home/greet?name=" + button.title} onSetActive={ () => this.handleChangeActive(buttonIndex)} active={buttonIndex === activeIndex } title={button.title} key={button.key} />)}
