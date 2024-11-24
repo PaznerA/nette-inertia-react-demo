@@ -17,6 +17,7 @@ class Bootstrap
 		$this->configurator = new Configurator;
 		// $this->configurator->setDebugMode(FALSE); // for performance testing
 		$this->configurator->setTempDirectory($this->rootDir . '/temp');
+		bdump($_POST); // post params from inertia are lost??
 	}
 
 

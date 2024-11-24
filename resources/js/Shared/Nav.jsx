@@ -60,7 +60,7 @@ render() {
             <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto"> 
                 <NavButton href="/home" onSetActive="" active={false} title="Home" key="0" />
                 <NavButton href="/books/index" onSetActive="" active={false} title="BOOKS list" key="1" />
-                <NavButton href="/books/create" onSetActive="" active={false} title="BOOKS create(err)" key="2" />
+                <NavButton href="/books/create" onSetActive="" active={false} title="BOOKS create" key="2" />
                 {this.state.buttons.map((button, buttonIndex) => 
                     /* todo: determine which nav button is active depending on the activeIndex state */
                     <NavButton href={"/home/greet?name=" + button.title} onSetActive={ () => this.handleChangeActive(buttonIndex)} active={buttonIndex === activeIndex } title={button.title} key={button.key} />)}

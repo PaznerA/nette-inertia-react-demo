@@ -20,6 +20,13 @@ final class BooksController {
         return $this->db->query("SELECT * FROM book LIMIT 50")->fetchAll();
     }
 
+    public function getById(int $bookId): ?array {
+        return $this->db->query(
+            "SELECT * FROM book WHERE %1 LIMIT 1", 
+            ['id' => $bookId]
+        )->fetchAll();
+    }
+
 
 
     /**
@@ -29,6 +36,7 @@ final class BooksController {
      * @throws \Exception
      */
     public function create(?array $data = null): void {
+        bdump($data);
         $this->db->query("INSERT INTO book", $data);
     }
 

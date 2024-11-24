@@ -5,18 +5,6 @@ import { Link } from '@inertiajs/react'
 import { router } from '@inertiajs/react'
 import { useState } from 'react'
 
-const BookListItem = ({book, bookIndex}) => {
-    return (
-        <div className="text-sm lg:flex-grow">
-            <Link 
-                className="block mt-4 lg:inline-block lg:mt-0 text-blue-950 hover:text-blue-500 mr-4" 
-                href={"/books/book-read?id=" + bookIndex}
-            >
-               #{bookIndex} - <small>title:</small>{book.title}, <small>author:</small>{book.author}
-            </Link>
-        </div>
-    )
-}
 
 const BookForm = ({url}) => {
     const createBookApi = url
@@ -36,38 +24,21 @@ const BookForm = ({url}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log(book)
-        try {
-            // setIsLoading(true);
-            const response = await fetch(createBookApi, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(book),
-            });
 
-            if (response.ok) {
+        router.post(createBookApi, book, {
+            onFinish: () => {
                 console.log('Form submitted successfully!');
                 setBook({title: "",author: "",isbn: ""})
-                // navigate('/show-user');
-            } else {
-                console.error('Form submission failed!');
+            },
+            onError: () => {
+                console.error('Form submission failed!'); 
             }
+        })
 
-        } catch (error) {
-            // setError(error.message);
-        } finally{
-            // setIsLoading(false);
-        }
     }
     return (
         <div className="text-sm lg:flex-grow">
             <div className='book-form pt-4'>
-                <div className='heading'>
-                {/* {isLoading && <Loader />}
-                {error && <p>Error: {error}</p>}
-                    <p>Book Form</p> */}
-                </div>
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-row justify-items-start w-1/4 mb-2">
                         <label for="name" className="w-1/3 form-label">Title</label>
@@ -88,32 +59,16 @@ const BookForm = ({url}) => {
     )
 }
 
-export default function Index({ books, addBookLink }) {
+export default function AddOrEdit({ book, addBookLink }) {
     return (
         <div className="lg:container lg:mx-auto">
             <Nav></Nav>
             <div className="wrapper mt-2">
 
-                <div className="bg-lime-200 p-2 pl-5">
-                    <h3>Book list:</h3>
-                    <div className="w-full block items-center">
-                        {books.map((book, bookIndex) => 
-                        <BookListItem key={bookIndex} book={book} bookIndex={bookIndex} />)}
-                    </div>
-                </div>
-
                 <div className="mt-2 bg-lime-300 p-2 pl-5">
-                    <h3>Add book:</h3>
+                    <h3>Add/edit book:</h3>
                     <div className="w-full block items-center">
                         <BookForm url={addBookLink}/>
-                    </div> 
-                </div>
-
-
-                <div className="mt-2 bg-lime-300 p-2 pl-5">
-                    <h3>Form helper test:</h3>
-                    <div className="w-full block items-center">
-                        <AddBookForm url={addBookLink}/>
                     </div> 
                 </div>
 
